@@ -17,7 +17,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   Widget? activeScreen;
 
-  final List<String> selectedAnswers = [];
+  List<String> selectedAnswers = [];
 
   @override
   void initState() {
@@ -29,12 +29,14 @@ class _QuizState extends State<Quiz> {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = ResultsScreen(chosenAnswers: selectedAnswers);
+        activeScreen = ResultsScreen(
+            chosenAnswers: selectedAnswers, restartQuiz: switchScreen);
       });
     }
   }
 
   void switchScreen() {
+    selectedAnswers = [];
     setState(() {
       activeScreen = QuestionsScreen(
         onSelectAnswer: selectedAnswer,
